@@ -1,4 +1,4 @@
-name: FreeVPSVNC
+name: Free VPS VNC
 
 on:
   workflow_dispatch:
@@ -7,10 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Run entrypoint.sh
-      run: |
-        chmod +x entrypoint.sh
-        ./entrypoint.sh
+      - name: List files
+        run: ls -lah
+
+      - name: Setup permissions
+        run: chmod +x *.sh
+
+      - name: Run VNC
+        run: ./launch_vnc.sh || ./entrypoint.sh
